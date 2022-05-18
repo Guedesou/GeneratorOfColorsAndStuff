@@ -1,0 +1,358 @@
+@charset "UTF-8";
+:root {
+  --bgc: #202124;
+  --fgc: #fff;
+  --t: 20s;
+  --r: 12deg;
+  font-family: Inter, sans-serif;
+  background: var(--bgc);
+  color: var(--fgc);
+}
+
+.light {
+  --fgc: #000;
+  --bgc: #fff;
+}
+
+.slantback {
+  --r: -12deg;
+}
+
+/*
+svg {
+  overflow: visible;
+}
+svg path {
+  stroke: var(--bgc);
+  stroke-width: 8px;
+}*/
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 80vmin;
+  background: var(--bgc);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.container::after, .container::before {
+  content: "";
+  position: absolute;
+  transition: transform 500ms cubic-bezier(0.3, 0.7, 0, 1);
+}
+.container::after {
+  z-index: 2;
+  top: -20vmin;
+  right: -10%;
+  bottom: -20vmin;
+  width: 60%;
+  background: var(--bgc);
+  box-shadow: 0 0 5rem var(--bgc);
+  transform: rotate(var(--r));
+  transform-origin: 0 50%;
+}
+.container::before {
+  z-index: 5;
+  top: 50%;
+  height: 75vmin;
+  left: 50%;
+  width: 3px;
+  background: var(--fgc);
+  border-radius: 2px;
+  transform: translate(-50%, -50%) rotate(var(--r));
+}
+
+.color {
+  text-decoration: none;
+  z-index: 1;
+  width: 30vmin;
+  --bg: var(--fgc);
+  background: var(--bg);
+  color: var(--bgc);
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  border: 1px solid var(--fgc);
+  perspective: 600px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) translateX(100%);
+  -webkit-animation: var(--t) gotToLeft cubic-bezier(0, 1, 0.6, 1);
+          animation: var(--t) gotToLeft cubic-bezier(0, 1, 0.6, 1);
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+.color::before {
+  opacity: 0.5;
+  position: absolute;
+  content: "";
+  inset: 0;
+  box-shadow: 0 0 3rem var(--color);
+  -webkit-animation: var(--t) fadeOut cubic-bezier(0, 1, 0.6, 1);
+          animation: var(--t) fadeOut cubic-bezier(0, 1, 0.6, 1);
+}
+.color::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color);
+  background: var(--bgc);
+  transform: scale(1);
+  -webkit-animation: var(--t) fade cubic-bezier(0, 1, 0.6, 1);
+          animation: var(--t) fade cubic-bezier(0, 1, 0.6, 1);
+}
+
+@-webkit-keyframes fadeOut {
+  0%, 17% {
+    opacity: 0.5;
+  }
+  20%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0%, 17% {
+    opacity: 0.5;
+  }
+  20%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.color--top {
+  background: transparent;
+  color: transparent;
+  z-index: 4;
+  border-color: transparent;
+  --bg: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+.color--top::before {
+  display: none;
+}
+.color--top::after {
+  display: none;
+}
+
+@-webkit-keyframes fade {
+  0%, 17% {
+    opacity: 0;
+  }
+  33%, 100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade {
+  0%, 17% {
+    opacity: 0;
+  }
+  33%, 100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+@-webkit-keyframes gotToLeft {
+  90%, 100% {
+    right: 100%;
+    transform: translateY(-50%) translateX(-3rem) scale(0.75);
+  }
+}
+@keyframes gotToLeft {
+  90%, 100% {
+    right: 100%;
+    transform: translateY(-50%) translateX(-3rem) scale(0.75);
+  }
+}
+.color__bottom,
+.color__top {
+  background: var(--bg);
+  padding: 0.3em;
+}
+
+.color__bottom {
+  padding-bottom: 0.2em;
+}
+
+.color__top {
+  order: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.color__brand {
+  font-weight: 300;
+  font-size: 2.1vmin;
+}
+
+.color__logo {
+  height: 2.2vmin;
+  width: 2.2vmin;
+  transform: scale(1.1) translateY(-10%);
+}
+
+.color--top .color__logo {
+  opacity: 0;
+}
+
+.color__bottom {
+  order: 3;
+}
+
+.color__swatch {
+  order: 2;
+  aspect-ratio: 1;
+  background: var(--color);
+}
+
+@-webkit-keyframes top {
+  0%, 5% {
+    transform: scale(1.2);
+  }
+  15%, 100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes top {
+  0%, 5% {
+    transform: scale(1.2);
+  }
+  15%, 100% {
+    transform: scale(1);
+  }
+}
+.color--top .color__swatch {
+  -webkit-animation: var(--t) op cubic-bezier(0, 1, 0.6, 1);
+          animation: var(--t) op cubic-bezier(0, 1, 0.6, 1);
+}
+
+@-webkit-keyframes op {
+ 
+  0% {
+    transform: translateX(50%) translateZ(50vmin) rotateY(-100deg);
+  }
+  11% {
+    opacity: 1;
+    transform: scale(0.955);
+  }
+  13%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes op {
+ 
+  0% {
+    transform: translateX(50%) translateZ(50vmin) rotateY(-100deg);
+  }
+  11% {
+    opacity: 1;
+    transform: scale(0.955);
+  }
+  13%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.color__name,
+.color__value {
+  display: block;
+  height: 1.2em;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-animation: var(--t) swipe cubic-bezier(0, 1, 0.6, 1);
+          animation: var(--t) swipe cubic-bezier(0, 1, 0.6, 1);
+}
+
+@-webkit-keyframes swipe {
+  0%, 5% {
+    opacity: 0;
+    transform: scale(1.1) translateX(25%);
+  }
+  12.5%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes swipe {
+  0%, 5% {
+    opacity: 0;
+    transform: scale(1.1) translateX(25%);
+  }
+  12.5%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.color__value {
+  font-weight: 700;
+  font-size: 3.5vmin;
+  -webkit-animation-delay: 75ms;
+          animation-delay: 75ms;
+}
+
+.color__name {
+  margin-top: -0.2em;
+  font-size: 2.1vmin;
+  font-weight: 300;
+}
+
+.slantback .color__value {
+  -webkit-animation-delay: 0ms;
+          animation-delay: 0ms;
+}
+.slantback .color__name {
+  -webkit-animation-delay: 75ms;
+          animation-delay: 75ms;
+}
+
+.logo {
+  display: none;
+}
+
+menu {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+button {
+  padding: 2.5vmin;
+  font-size: 3vmin;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  color: var(--fgc);
+}
+button::after {
+  content: "🌞";
+}
+button[aria-pressed]::after {
+  content: "🌜";
+}
+button[data-toggleslant] {
+  margin-right: -2vmin;
+}
+button[data-toggleslant]::after {
+  content: "\\";
+}
+button[data-toggleslant][aria-pressed]::after {
+  content: "/";
+}
+
+menu, li {
+  list-style: none;
+}
