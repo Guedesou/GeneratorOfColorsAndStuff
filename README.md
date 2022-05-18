@@ -7,7 +7,7 @@
 Based on Codepen artist @meodai: <a href="https://codepen.io/meodai"> HERE </a> </h4>
 
 <p align="center">
-<a href="gencardscolors.vercel.app"><img src="https://imgur.com/zMbkGQw.png" title="Generator of Colors" /></a>
+<a href="https://gencardscolors.vercel.app"><img src="https://imgur.com/zMbkGQw.png" title="Generator of Colors" /></a>
 </p>
 
 
